@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@source "./**/*.{vue,ts,js}";
+
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-bg: var(--accent-bg);
+  --color-code-bg: var(--code-bg);
+  --color-border: var(--border);
+  --color-muted: var(--text-h);
+  --color-accent-border: var(--accent-border);
+}
+
+:root {
+  --text: #636c75;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #3bb4ff;
+  --accent-bg: rgba(59, 144, 255, 0.1);
+  --accent-border: rgb(39, 133, 255);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--accent-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f3f4f6;
+    --text-h: #cdcdcd;
+    --bg: #161a1d;
+    --border: #515567;
+    --code-bg: #1d2934;
+    --accent: rgb(49, 80, 105);
+    --accent-bg: rgb(29, 43, 61);
+    --accent-border: rgb(11, 182, 255);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  @apply pt-2 px-4 w-full;
+}
