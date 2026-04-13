@@ -79,7 +79,7 @@ def health():
 @app.get("/api/search")
 def search(q: str = Query(..., min_length=1)):
     try:
-        return ytmusic.search(q, filter="songs")
+        return ytmusic.search(q, filter="videos")
     except HTTPException:
         raise
     except Exception as exc:

@@ -7,6 +7,7 @@ export const usePlayerStore = defineStore("player", () => {
   const isPlaying = ref<boolean>(false);
   const url = ref<string>("");
   const currentTime = ref(0);
+  const currentVolume = ref(0);
 
   // Дополнительная логика
 
@@ -19,6 +20,11 @@ export const usePlayerStore = defineStore("player", () => {
   audio.addEventListener("timeupdate", () => {
     if (audio) {
       currentTime.value = audio.currentTime;
+    }
+  });
+  audio.addEventListener("volumechange", () => {
+    if (audio) {
+      currentVolume.value = audio.volume;
     }
   });
 
@@ -40,6 +46,11 @@ export const usePlayerStore = defineStore("player", () => {
   });
 
   // Основные экшены
+
+  const updateAudioVolume = (newVolume: string) => {
+    if (!audio || !newVolume) return;
+    audio.volume = Number(newVolume) / 100;
+  };
 
   const updateAudioTime = (newTime: number) => {
     if (!audio || !newTime) return;
@@ -76,9 +87,11 @@ export const usePlayerStore = defineStore("player", () => {
   };
 
   return {
+    updateAudioVolume,
     togglePlay,
     setupAudio,
     updateAudioTime,
+    currentVolume,
     Error,
     isPlaying,
     currentTime,

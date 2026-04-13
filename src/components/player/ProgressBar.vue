@@ -7,25 +7,34 @@ const playerStore = usePlayerStore();
 const trackStore = useTrackStore();
 const duration = computed(() => trackStore.currentTrack?.duration_seconds || 0);
 const currentTime = computed(() => playerStore.currentTime);
+const dragTime = ref(0);
 
 const isDragging = ref(false);
 
 const handleTimeChange = (event: Event) => {
-  isDragging.value = false;
   const target = event.target as HTMLInputElement;
   playerStore.updateAudioTime(Number(target.value));
+  setTimeout(() => {
+    isDragging.value = false;
+  }, 50);
+};
+
+const handleDragChange = (event: Event) => {
+  isDragging.value = true;
+  const target = event.target as HTMLInputElement;
+  dragTime.value = Number(target.value);
 };
 </script>
 
 <template>
-  <div class="absolute cursor-pointer -top-2 w-full">
+  <div class="absolute -top-2 w-full">
     <input
       @change="handleTimeChange"
-      @input="isDragging = true"
+      @input="handleDragChange"
       class="w-full"
       type="range"
       :max="duration"
-      :value="isDragging ? 0 : currentTime"
+      :value="isDragging ? dragTime : currentTime"
     />
   </div>
 </template>
