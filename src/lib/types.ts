@@ -1,24 +1,41 @@
-export type Song = {
+export type TrackSource = "song" | "video";
+export type SearchSource = "songs" | "videos";
+
+export interface Track {
   videoId: string;
-  title?: string;
-  artists?: Array<{ name?: string }>;
-  thumbnails?: { url?: string }[];
-  duration_seconds: number;
-  duration: string;
-};
-
-export type Response = {
-  tracks?: Song[];
-};
-
-export interface SongData extends Song {
-  audioUrl?: string;
-  streamingData?: {
-    adaptiveFormats: {
-      mimeType: string;
-      bitrate: number;
-      url: string;
-      signatureCipher: string;
-    }[];
-  };
+  title: string;
+  artists: { name: string; id?: string | null }[];
+  album?: { name: string; id?: string | null } | null;
+  duration?: string | null;
+  durationSeconds?: number | null;
+  thumbnail?: string | null;
+  thumbnailSmall?: string | null;
+  source: TrackSource;
 }
+
+export interface ChartResponse {
+  title?: string;
+  tracks: Track[];
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  picture?: string | null;
+}
+
+export interface PlaylistSummary {
+  id: number;
+  name: string;
+  trackCount: number;
+  covers: string[];
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface PlaylistDetail extends PlaylistSummary {
+  tracks: Track[];
+}
+
+export type RepeatMode = "off" | "all" | "one";

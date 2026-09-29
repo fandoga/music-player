@@ -3,66 +3,129 @@
 @source "./**/*.{vue,ts,js}";
 
 @theme {
-  --color-accent: var(--accent);
-  --color-accent-bg: var(--accent-bg);
-  --color-code-bg: var(--code-bg);
-  --color-border: var(--border);
-  --color-muted: var(--text-h);
-  --color-accent-border: var(--accent-border);
+  --font-sans: "Figtree", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --color-app: #0b0712;
+  --color-surface: #140e1d;
+  --color-elevated: #1d1529;
+  --color-highlight: #2a1f3b;
+  --color-line: #2e2342;
+
+  --color-accent: #a855f7;
+  --color-accent-hi: #c38bff;
+  --color-accent-lo: #7c3aed;
+  --color-accent-deep: #3b1d6e;
+
+  --color-fg: #ffffff;
+  --color-muted: #b7aaca;
+  --color-subtle: #7f7294;
+  --color-danger: #ff6b81;
+
+  --animate-eq: eq 0.9s ease-in-out infinite;
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-pop-in: pop-in 180ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  --animate-toast-in: toast-in 220ms cubic-bezier(0.2, 0.9, 0.3, 1);
+
+  @keyframes eq {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 :root {
-  --text: #636c75;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #3bb4ff;
-  --accent-bg: rgba(59, 144, 255, 0.1);
-  --accent-border: rgb(39, 133, 255);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--accent-bg);
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.45;
+  background: var(--color-app);
+  color: var(--color-fg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #f3f4f6;
-    --text-h: #cdcdcd;
-    --bg: #161a1d;
-    --border: #515567;
-    --code-bg: #1d2934;
-    --accent: rgb(49, 80, 105);
-    --accent-bg: rgb(29, 43, 61);
-    --accent-border: rgb(11, 182, 255);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-app);
 }
 
-* {
-  box-sizing: border-box;
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 
-.container {
-  @apply pt-2 px-4 w-full;
+:focus-visible {
+  outline: 2px solid var(--color-accent-hi);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+/* Thin scrollbars that only show up when needed */
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s;
+}
+.scroll-area:hover {
+  scrollbar-color: rgb(255 255 255 / 0.22) transparent;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: #2b2140;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+  animation: var(--animate-fade-in);
 }

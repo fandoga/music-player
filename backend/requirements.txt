@@ -2,3 +2,6 @@ fastapi
 uvicorn[standard]
 ytmusicapi
 yt-dlp
+google-auth
+requests
+python-dotenv

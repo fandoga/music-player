@@ -27,7 +27,7 @@ npm run dev
 
 ## API endpoints
 
-- `GET /api/search?q=<query>` - search songs
+- `GET /api/search?q=<query>&source=songs|videos` - search YouTube Music songs or YouTube videos
 - `GET /api/charts?country=US` - get charts by country code
 
 ## headers_auth (recommended for 403)
